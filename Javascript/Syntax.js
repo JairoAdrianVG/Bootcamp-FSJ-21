@@ -92,6 +92,7 @@ console.log(resultadoFuncion1+" y devuelvo un string");
 console.log(resultadoFuncion2+"y no devuelvo nada");
 
 function sumarDosNumeros(){
+    
     //console.log(5+5);
     return 5+5;
 }
@@ -108,8 +109,8 @@ saludarUsuario();
 //PARAMETROS? Valor que recibe la funcion para trabajar
 // Este valor, viene de afuera de la funcion 
 
-function sumaDosNumerosParam(num1,num2) {
-    console.log(num1+num2);
+function sumaDosNumerosParam(num1,num2,num3=5) {
+    console.log(num1+num2+num3);
     return num1+num2
 } 
 
