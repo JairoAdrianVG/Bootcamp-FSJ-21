@@ -101,3 +101,81 @@ console.log(car1.getColor());
 //Abstraccion => Es la capacidad de crear metodos para interactuar con datos limitados de una clase
 //Getters y Setters
 //Son los metodos encargados de cambiar o mostrar informacion encapsulada
+
+//Herencia => Capacidad que tiene una clase hija(subclase) de traer atributos y metodos del padre(clase)
+//Polimorfismo => Cambio de forma de un metodo
+
+
+class Animal{
+
+    //Atributos o Caracterisiticas
+    protected color:string;
+    protected raza:string;
+
+    constructor(color:string,raza:string){
+        this.color = color;
+        this.raza = raza;
+    }
+
+    //Metodos
+    comer():string{
+        return "Soy un animal y estoy comiendo nam";
+    }
+
+    respirar():string{
+        return "Soy un animal y estoy respirando";
+    }
+    
+    getColor():string{
+        return this.color;
+    }
+
+    getRaza():string{
+        return this.raza;
+    }
+}
+
+
+let pez = new Animal("Naranja","Pez Payaso");
+
+class Perro extends Animal{
+
+    //Atributos
+    private cantPatas:number;
+    private cola:string;
+    private altura:number;
+    private peso:number;
+
+    //constructor
+    constructor(color:string,raza:string,cantPatas:number,cola:string,altura:number,peso:number){
+        super(color,raza);
+        this.cantPatas = cantPatas;
+        this.cola = cola;
+        this.altura = altura;
+        this.peso = peso;
+    }
+
+    //Metodos
+    ladrar():string{
+        return "Guau re Guau";
+    }
+
+    caminar():string{
+        return "Soy un perro y estoy caminando";
+    }
+
+    comer():string{
+        return `Soy un ${this.raza} y estoy comiendo`;
+    }
+
+}
+
+let salchicha = new Perro("Marron","Perro Salchicha",4,"Corta",60,25);
+
+console.log(salchicha.comer());
+console.log(salchicha.ladrar());
+console.log(salchicha.caminar());
+/*
+Diseña una clase llamada CuentaBancaria que tenga atributos como saldo, titular y numeroCuenta. Implementa métodos públicos para depositar dinero, retirar dinero y obtener el saldo actual de la cuenta. Asegúrate de que solo se puedan modificar el saldo y el titular mediante métodos específicos, protegiendo así la integridad de los datos.
+*/
+

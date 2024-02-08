@@ -4,6 +4,21 @@
 nombre = "5";
 */
 // POO OOP Programacion Orientada a Objetos - Object Oriented Programming
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 //Que es la POO?
 // A traves de un molde(clases), podemos crear cosas(objetos). 
 //Que es una clase?
@@ -73,3 +88,55 @@ car1.setColor("Azul");
 console.log(car1);
 console.log(car1.getColor());
 //Abstraccion => Es la capacidad de crear metodos para interactuar con datos limitados de una clase
+//Getters y Setters
+//Son los metodos encargados de cambiar o mostrar informacion encapsulada
+//Herencia => Capacidad que tiene una clase hija(subclase) de traer atributos y metodos del padre(clase)
+//Polimorfismo => Cambio de forma de un metodo
+var Animal = /** @class */ (function () {
+    function Animal(color, raza) {
+        this.color = color;
+        this.raza = raza;
+    }
+    //Metodos
+    Animal.prototype.comer = function () {
+        return "Soy un animal y estoy comiendo nam";
+    };
+    Animal.prototype.respirar = function () {
+        return "Soy un animal y estoy respirando";
+    };
+    Animal.prototype.getColor = function () {
+        return this.color;
+    };
+    Animal.prototype.getRaza = function () {
+        return this.raza;
+    };
+    return Animal;
+}());
+var pez = new Animal("Naranja", "Pez Payaso");
+var Perro = /** @class */ (function (_super) {
+    __extends(Perro, _super);
+    //constructor
+    function Perro(color, raza, cantPatas, cola, altura, peso) {
+        var _this = _super.call(this, color, raza) || this;
+        _this.cantPatas = cantPatas;
+        _this.cola = cola;
+        _this.altura = altura;
+        _this.peso = peso;
+        return _this;
+    }
+    //Metodos
+    Perro.prototype.ladrar = function () {
+        return "Guau re Guau";
+    };
+    Perro.prototype.caminar = function () {
+        return "Soy un perro y estoy caminando";
+    };
+    Perro.prototype.comer = function () {
+        return "Soy un ".concat(this.raza, " y estoy comiendo");
+    };
+    return Perro;
+}(Animal));
+var salchicha = new Perro("Marron", "Perro Salchicha", 4, "Corta", 60, 25);
+console.log(salchicha.comer());
+console.log(salchicha.ladrar());
+console.log(salchicha.caminar());
