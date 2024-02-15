@@ -179,3 +179,53 @@ console.log(salchicha.caminar());
 Diseña una clase llamada CuentaBancaria que tenga atributos como saldo, titular y numeroCuenta. Implementa métodos públicos para depositar dinero, retirar dinero y obtener el saldo actual de la cuenta. Asegúrate de que solo se puedan modificar el saldo y el titular mediante métodos específicos, protegiendo así la integridad de los datos.
 */
 
+class CuentaBancaria{
+
+    private saldo:number;
+    private titular:string;
+    private numCuenta: number;
+
+    constructor(saldo:number,titular:string,numCuenta:number){
+        this.saldo = saldo;
+        this.titular = titular;
+        this.numCuenta = numCuenta;
+    }
+
+    depositarDinero(deposito:number){
+       return this.saldo += deposito
+    }
+    
+    retirarDinero(retiro:number){
+        //saldo minimo = 0
+        //retiro maximo = 750
+
+        if(this.saldo > retiro && retiro < 750){
+            this.saldo -=  retiro; 
+        }else{
+            console.log(`El saldo es insuficiente. Tu saldo actual es ${this.saldo}`);
+        }
+        
+    }
+
+    getSaldo(){
+        return this.saldo;
+    }
+
+    setTitular(nuevoTitular:string){
+        this.titular = nuevoTitular;
+    }
+
+    getTitular(){
+        return this.titular;
+    }
+}
+
+let cuentitaAhorros = new CuentaBancaria(0,"Jairo Vega",1234567);
+console.log(cuentitaAhorros.getSaldo());
+cuentitaAhorros.depositarDinero(50);
+console.log(cuentitaAhorros.getSaldo());
+cuentitaAhorros.retirarDinero(30);
+console.log(cuentitaAhorros.getSaldo());
+cuentitaAhorros.retirarDinero(30);
+console.log(cuentitaAhorros.getSaldo());
+

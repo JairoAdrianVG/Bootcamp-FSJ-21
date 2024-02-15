@@ -140,3 +140,44 @@ var salchicha = new Perro("Marron", "Perro Salchicha", 4, "Corta", 60, 25);
 console.log(salchicha.comer());
 console.log(salchicha.ladrar());
 console.log(salchicha.caminar());
+/*
+Diseña una clase llamada CuentaBancaria que tenga atributos como saldo, titular y numeroCuenta. Implementa métodos públicos para depositar dinero, retirar dinero y obtener el saldo actual de la cuenta. Asegúrate de que solo se puedan modificar el saldo y el titular mediante métodos específicos, protegiendo así la integridad de los datos.
+*/
+var CuentaBancaria = /** @class */ (function () {
+    function CuentaBancaria(saldo, titular, numCuenta) {
+        this.saldo = saldo;
+        this.titular = titular;
+        this.numCuenta = numCuenta;
+    }
+    CuentaBancaria.prototype.depositarDinero = function (deposito) {
+        return this.saldo += deposito;
+    };
+    CuentaBancaria.prototype.retirarDinero = function (retiro) {
+        //saldo minimo = 0
+        //retiro maximo = 750
+        if (this.saldo > retiro && retiro < 750) {
+            this.saldo -= retiro;
+        }
+        else {
+            console.log("El saldo es insuficiente. Tu saldo actual es ".concat(this.saldo));
+        }
+    };
+    CuentaBancaria.prototype.getSaldo = function () {
+        return this.saldo;
+    };
+    CuentaBancaria.prototype.setTitular = function (nuevoTitular) {
+        this.titular = nuevoTitular;
+    };
+    CuentaBancaria.prototype.getTitular = function () {
+        return this.titular;
+    };
+    return CuentaBancaria;
+}());
+var cuentitaAhorros = new CuentaBancaria(0, "Jairo Vega", 1234567);
+console.log(cuentitaAhorros.getSaldo());
+cuentitaAhorros.depositarDinero(50);
+console.log(cuentitaAhorros.getSaldo());
+cuentitaAhorros.retirarDinero(30);
+console.log(cuentitaAhorros.getSaldo());
+cuentitaAhorros.retirarDinero(30);
+console.log(cuentitaAhorros.getSaldo());
