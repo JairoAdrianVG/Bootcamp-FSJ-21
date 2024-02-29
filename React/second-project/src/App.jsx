@@ -13,7 +13,6 @@ function App() {
 
   return (
     <>
-      <h1>Holiwi</h1>
       {/* Siempre para mostrar un dato, por ejemplo un estado utilizo las {}*/}
       <Countries/> 
     </>
