@@ -1,4 +1,7 @@
 import { useState } from "react"
+import { createUserWithEmailAndPassword } from "firebase/auth"
+import { auth } from "../../firebase/config"
+
 export const SignUpForm = () => {
  
     const [userCredentials,setUserCredentials] = useState({})
@@ -9,6 +12,24 @@ export const SignUpForm = () => {
       console.log(userCredentials);
     }
   
+    const registerNewUser = (e) => {
+        e.preventDefault();
+
+        createUserWithEmailAndPassword(auth, userCredentials.email, userCredentials.password)
+            .then((userCredential) => {
+        // Signed up 
+        const user = userCredential.user;
+        console.log(user);
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.log(errorCode);
+          console.log(errorMessage);
+    });
+        
+        
+    }
   
     return (
       <>
@@ -24,7 +45,7 @@ export const SignUpForm = () => {
                   <input type="password" name="password" className="form-control" placeholder="ingrese su password" onChange={ e => handleCredentials(e)} />
                   </div>
                   <div className="row mt-2">
-                      <button className="btn btn-success">Sign Up</button>
+                      <button className="btn btn-success" onClick={e => {registerNewUser(e)}}>Sign Up</button>
                   </div>
               </div>
           </div>
