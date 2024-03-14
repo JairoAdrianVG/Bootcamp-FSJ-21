@@ -1,5 +1,6 @@
 export interface ICountry{
     name: {common:""},
-    flags : {svg: ""},
+    flags : {svg: "",alt: ""},
     region: ""
 }
+
