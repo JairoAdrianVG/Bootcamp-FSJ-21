@@ -1,5 +1,6 @@
 <?php 
-require_once '../models/Product.php';
+require_once './models/Product.php';
+require_once './config/database.php';
 
 class ProductController{
     public $product;
@@ -13,9 +14,26 @@ class ProductController{
     
 
     public function create(){
-        $this->product->name = $_POST['name'];
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+            $this->product->name = $_POST['name'];
+            $this->product->description = $_POST['description'];
+            $this->product->price = $_POST['price'];
+            $this->product->quantity = $_POST['quantity'];
+            $this->product->category = $_POST['category'];
+
+            if($this->product->create()){
+                header("Location: ../views/index.php");
+            }else{
+                echo "Error al crear el producto";
+            }
+        }else{
+            include './views/create.php';
+        }
     }
     
+    public function read(){
+        include './views/index.php';
+    }
 
 }
 

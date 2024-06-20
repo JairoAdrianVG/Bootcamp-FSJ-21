@@ -1,0 +1,10 @@
+RewriteEngine On
+RewriteRule ^(.*)$ index.php?action=$1 [QSA,L]
+# RewriteEngine On ACTIVAMOS LA SOBREESCRITURA DE URL
+# RewriteRule SIGUIENDO LA SIGUIENTE REGLA
+#  ^ Inicio de cadena REGEX
+# (.*) Coincida con cualquier secuencia de caracteres
+# $ final de la cadena
+
+#[] Banderas/Flags a nuestra regla
+#QSA Query String Append 
