@@ -2,27 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Articulo;
+use App\Models\Comentario;
 use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
-class ArticuloController extends Controller
+class ComentarioController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        // Eloquent
-        return Articulo::all();
-
-        //Query Builders
-        /*$articulos = DB::table('articulos')
-        ->select('*')
+        $comentariosConArticulo = DB::table('comentarios')
+        ->join('articulos','articulos.id','=','comentarios.articulo_id')
+        ->select('comentarios.*','articulos.titulo')
         ->get();
 
-        return $articulos;*/
+       return response()->json($comentariosConArticulo);
+       // return $comentariosConArticulo;
     }
 
     /**
@@ -30,7 +27,7 @@ class ArticuloController extends Controller
      */
     public function create()
     {
-        //
+      
     }
 
     /**
@@ -38,7 +35,7 @@ class ArticuloController extends Controller
      */
     public function store(Request $request)
     {
-        $articulo = Articulo::create($request->all());
+        $articulo = Comentario::create($request->all());
         return response()->json($articulo,201);
     }
 
@@ -47,7 +44,16 @@ class ArticuloController extends Controller
      */
     public function show(string $id)
     {
-        //
+        //$comment = Comentario::with('articulo:id,titulo')->find($id);
+
+        
+        $comentario = DB::table('comentarios')
+        ->where('comentarios.id','=',$id)
+        ->join('articulos','articulos.id','=', 'comentarios.articulo_id')
+        ->select('comentarios.*','articulos.titulo')
+        ->get();
+
+        return response()->json($comentario);
     }
 
     /**
@@ -63,14 +69,9 @@ class ArticuloController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $articulo = Articulo::findOrFail($id);
-        /*
-        $articulo->titulo = $request->titulo;
-        $articulo->descripcion = $request->descripcion;
-        $articulo->cantidad = $request->cantidad;
-        $articulo->save();*/
-        $articulo->update($request->all());
-        return response()->json($articulo,200);
+        $comentario = Comentario::findOrFail($id);
+        $comentario->update($request->all());
+        return response()->json($comentario,200);
     }
 
     /**
@@ -78,8 +79,6 @@ class ArticuloController extends Controller
      */
     public function destroy(string $id)
     {
-        $articulo = Articulo::findOrFail($id);
-        $articulo->delete();
-        return response('El articulo se elimino con exito',200);
+        //
     }
 }
