@@ -12,7 +12,8 @@ class ArticuloController extends Controller
      */
     public function index()
     {
-        //
+        $articulos = Articulo::all();
+        return view('articulos.index',['datos' => $articulos]);
     }
 
     /**
@@ -20,7 +21,7 @@ class ArticuloController extends Controller
      */
     public function create()
     {
-        //
+        return view('articulos.create');
     }
 
     /**
@@ -28,7 +29,8 @@ class ArticuloController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Articulo::create($request->all());
+        return redirect('articulos');
     }
 
     /**
@@ -42,17 +44,19 @@ class ArticuloController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Articulo $articulo)
+    public function edit(string $id)
     {
-        //
+        $articulo = Articulo::findOrFail($id);
+        return view('articulos.edit',['data' => $articulo]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Articulo $articulo)
+    public function update(Request $request)
     {
-        //
+        $articulo = Articulo::findOrFail($request->id);
+        $articulo->update($request->all());
     }
 
     /**
